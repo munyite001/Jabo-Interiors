@@ -1,13 +1,3 @@
-/* -------------------------------------------
-
-Name: 		Quarty
-Version:  1.0
-Author:		Nazar Miller (millerDigitalDesign)
-Portfolio:  https://themeforest.net/user/millerdigitaldesign/portfolio?ref=MillerDigitalDesign
-
-p.s. I am available for Freelance hire (UI design, web development). mail: miller.themes@gmail.com
-
-------------------------------------------- */
 
 $(function() {
 
@@ -355,10 +345,6 @@ $(function() {
       }
     });
   });
-
-  if ($(window).width() < 768) {
-    $('.qrt-mobile-fix').attr("href", "#.");
-  }
 
   $(".qrt-lock").on('click', function() {
     $('.qrt-map').toggleClass('qrt-active');
@@ -758,10 +744,6 @@ $(function() {
         }
       });
     });
-
-    if ($(window).width() < 768) {
-      $('.qrt-mobile-fix').attr("href", "#.");
-    }
 
     $(".qrt-lock").on('click', function() {
       $('.qrt-map').toggleClass('qrt-active');
