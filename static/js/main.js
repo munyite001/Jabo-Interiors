@@ -472,17 +472,17 @@ $(function() {
   });
 
   if ($("div").is("#map")) {
-    mapboxgl.accessToken = 'pk.eyJ1Ijoic3Rvc2NhciIsImEiOiJja2VpbDE4b2UwbDg3MnNwY2d3YzlvcDV5In0.e26tLedpKwxrkOmPkWhQlg';
+    mapboxgl.accessToken = 'pk.eyJ1IjoibXVueWl0ZTAwMSIsImEiOiJjbHYyYmxheGkwZHluMmlyeWdiaWwxYTVrIn0.-lAOGSexrKEQkxtoBm4OjQ';
     var map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/stoscar/ckggs77460wxw19ob8q5wldwf',
-      center: [34.992097, 1.024820],
+      style: 'mapbox://styles/mapbox/dark-v11',
+      center: [36.82389459391292, -1.2833118709052815], 
       zoom: 14
 
     });
 
     var marker = new mapboxgl.Marker()
-      .setLngLat([34.992097, 1.024820])
+      .setLngLat([36.82389459391292, -1.2833118709052815])
       .addTo(map);
   }
 

@@ -8,19 +8,19 @@
   <!-- color of address bar in mobile browser -->
   <meta name="theme-color" content="#28292C">
   <!-- favicon  -->
-  <link rel="shortcut icon" href="img/thumbnail.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../static/img/thumbnail.ico" type="image/x-icon">
   <!-- bootstrap css -->
-  <link rel="stylesheet" href="css/plugins/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/plugins/bootstrap.min.css">
   <!-- font awesome css -->
-  <link rel="stylesheet" href="css/plugins/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/css/plugins/font-awesome.min.css">
   <!-- swiper css -->
-  <link rel="stylesheet" href="css/plugins/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/plugins/swiper.min.css">
   <!-- fancybox css -->
-  <link rel="stylesheet" href="css/plugins/fancybox.min.css">
+  <link rel="stylesheet" href="../static/css/plugins/fancybox.min.css">
   <!-- mapbox css -->
-  <link href="css/plugins/mapbox-style.css" rel='stylesheet'>
+  <link href="../static/css/plugins/mapbox-style.css" rel='stylesheet'>
   <!-- main css -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../static/css/style.css">
 
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,8 +46,8 @@
       <div class="qrt-follower"><i class="fas fa-circle-notch"></i></div>
     </div>
     <div class="qrt-top-bar">
-      <a href="index.html" class="qrt-symbol qrt-cursor-scale qrt-anima-link"><span class="logo">J</span></a>
-      <a href="index.html" class="qrt-logo qrt-cursor-color qrt-cursor-scale qrt-anima-link">
+      <a href="{{ url_for('index') }}" class="qrt-symbol qrt-cursor-scale qrt-anima-link"><span class="logo">J</span></a>
+      <a href="{{ url_for('index') }}" class="qrt-logo qrt-cursor-color qrt-cursor-scale qrt-anima-link">
         <span class="logo-text">Jabo Interiors</span>
       </a>
       <div class="qrt-menu">
@@ -55,23 +55,23 @@
           <nav>
             <ul>
               <li>
-                <a class="qrt-mobile-fix" href="./index.html">Home</a>
+                <a class="qrt-mobile-fix" href="{{ url_for('index') }}">Home</a>
               </li>
               <li>
-                <a class="qrt-mobile-fix" href="./about-us.html">About</a>
+                <a class="qrt-mobile-fix" href="{{ url_for('about') }}">About</a>
               </li>
               <li>
-                <a class="qrt-mobile-fix" href="portfolio.html">Portfolio</a>
+                <a class="qrt-mobile-fix" href="{{ url_for('portfolio') }}">Portfolio</a>
               </li>
               <li class="current-menu-item">
-                <a class="qrt-mobile-fix" href="./contact.html">Contact</a>
+                <a class="qrt-mobile-fix" href="{{ url_for('contact') }}">Contact</a>
               </li>
             </ul>
           </nav>
         </div>
       </div>
       <div class="qrt-buttons">
-        <a href="contact-2.html" class="qrt-btn qrt-btn-md qrt-btn-color qrt-send-request qrt-anima-link qrt-mr-20"><span>Send request</span></a>
+        <a href="{{ url_for('contact') }}" class="qrt-btn qrt-btn-md qrt-btn-color qrt-send-request qrt-anima-link qrt-mr-20"><span>Send request</span></a>
         <div class="qrt-menu-btn qrt-cursor-color qrt-cursor-scale"><span></span></div>
         <div class="qrt-info-btn qrt-cursor-color qrt-cursor-scale"><span></span></div>
       </div>
@@ -82,10 +82,10 @@
               <h5>Country</h5><span>Kenya</span>
             </li>
             <li>
-              <h5>City</h5><span>Kitale</span>
+              <h5>City</h5><span>Nairobi</span>
             </li>
             <li>
-              <h5>Street</h5><span>North Avenue 31B, </span>
+              <h5>Street</h5><span>Moi Avenue </span>
             </li>
             <li>
               <h5>Email</h5><span><a class="qrt-cursor-scale qrt-cursor-color" href="#" data-no-swup>jabointeriors05@gmail.com</a></span>
@@ -106,43 +106,6 @@
               </ul>
             </div>
           </div>
-          <div class="qrt-divider"></div>
-          <div class="qrt-instagram">
-            <h5 class="qrt-mb-40">Instagram</h5>
-            <div class="qrt-instagram-frame">
-              <a href="#." class="qrt-instagram-item qrt-cursor-scale">
-                <div class="qrt-instagram-image-frame">
-                  <img src="img/projects/thumbnails/7.jpg" alt="instagram post">
-                </div>
-              </a>
-              <a href="#." class="qrt-instagram-item qrt-cursor-scale">
-                <div class="qrt-instagram-image-frame">
-                  <img src="img/projects/thumbnails/8.jpg" alt="instagram post">
-                </div>
-              </a>
-              <a href="#." class="qrt-instagram-item qrt-cursor-scale">
-                <div class="qrt-instagram-image-frame">
-                  <img src="img/projects/thumbnails/9.jpg" alt="instagram post">
-                </div>
-              </a>
-              <a href="#." class="qrt-instagram-item qrt-cursor-scale">
-                <div class="qrt-instagram-image-frame">
-                  <img src="img/projects/thumbnails/10.jpg" alt="instagram post">
-                </div>
-              </a>
-              <a href="#." class="qrt-instagram-item qrt-cursor-scale">
-                <div class="qrt-instagram-image-frame">
-                  <img src="img/projects/thumbnails/11.jpg" alt="instagram post">
-                </div>
-              </a>
-              <a href="#." class="qrt-instagram-item qrt-cursor-scale">
-                <div class="qrt-instagram-image-frame">
-                  <img src="img/projects/thumbnails/12.jpg" alt="instagram post">
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="qrt-divider"></div>
           <div class="qrt-divider"></div>
           <div class="qrt-subscribe">
             <h5 class="qrt-mb-40">Subscribe our newsletter</h5>
@@ -174,7 +137,7 @@
               <div class="col-lg-12">
 
                 <div class="qrt-page-cover">
-                  <img src="img/banners/cover2.jpg" alt="our office">
+                  <img src="../static/img/banners/banner (4).jpg" alt="our office">
                   <div class="qrt-about-info qrt-info-lg">
                     <div class="qrt-cover-info">
                       <ul class="qrt-table">
@@ -185,7 +148,7 @@
                           <h5 class="qrt-white">Email:</h5><a href="mailto:quarty.inbox@mail.com" data-no-swup><span>jabointeriors05@gmail.com</span></a>
                         </li>
                         <li>
-                          <h5 class="qrt-white">Adress:</h5><a href="https://goo.gl/maps/MAa6Au5d9ZMgSfBV7" target="_blank" data-no-swup><span>2420 Jane St, Downsview</span></a>
+                          <h5 class="qrt-white">Adress:</h5><a href="https://www.google.com.ua/maps/place/Moi+Ave,+Nairobi/@-1.283462,36.8209871,17z/data=!3m1!4b1!4m6!3m5!1s0x182f10d6678064cf:0x956bb6f5e0ab2aac!8m2!3d-1.2834674!4d36.823562!16s%2Fm%2F0w1fc62?entry=ttu" target="_blank" data-no-swup><span>Nairobi, Moi Ave</span></a>
                         </li>
                       </ul>
                     </div>
@@ -246,25 +209,16 @@
                 <div class="swiper-container qrt-brands-slider" style="overflow: visible">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                      <img src="img/brands/b1.svg" alt="brand">
+                      <img src="../static/img/brands/furniture_palace_logo.png" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                      <img src="img/brands/b2.svg" alt="brand">
+                      <img src="../static/img/brands/naivas_logo.png" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                      <img src="img/brands/b3.svg" alt="brand">
+                      <img src="../static/img/brands/orca-logo.png" alt="brand">
                     </div>
                     <div class="swiper-slide">
-                      <img src="img/brands/b4.svg" alt="brand">
-                    </div>
-                    <div class="swiper-slide">
-                      <img src="img/brands/b5.svg" alt="brand">
-                    </div>
-                    <div class="swiper-slide">
-                      <img src="img/brands/b6.svg" alt="brand">
-                    </div>
-                    <div class="swiper-slide">
-                      <img src="img/brands/b7.svg" alt="brand">
+                      <img src="../static/img/brands/tile_and_carpets_logo.jpeg" alt="brand">
                     </div>
                   </div>
                 </div>
@@ -276,7 +230,7 @@
 
                 <div class="qrt-call-to-action">
                   <h4>Learn more about us!</h4>
-                  <a class="qrt-btn qrt-btn-sm qrt-btn-color qrt-cursor-scale qrt-anima-link" href="about-us.html"><span>About us</span></a>
+                  <a class="qrt-btn qrt-btn-sm qrt-btn-color qrt-cursor-scale qrt-anima-link" href="{{ url_for('about') }}"><span>About us</span></a>
                 </div>
 
               </div>
@@ -295,28 +249,28 @@
   </div>
 
   <!-- jquery js -->
-  <script src="js/plugins/jquery.min.js"></script>
+  <script src="../static/js/plugins/jquery.min.js"></script>
   <!-- anime js -->
-  <script src="js/plugins/anime.min.js"></script>
+  <script src="../static/js/plugins/anime.min.js"></script>
   <!-- swiper js -->
-  <script src="js/plugins/swiper.min.js"></script>
+  <script src="../static/js/plugins/swiper.min.js"></script>
   <!-- progressbar js -->
-  <script src="js/plugins/progressbar.min.js"></script>
+  <script src="../static/js/plugins/progressbar.min.js"></script>
   <!-- smooth scrollbar js -->
-  <script src="js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../static/js/plugins/smooth-scrollbar.min.js"></script>
   <!-- overscroll js -->
-  <script src="js/plugins/overscroll.min.js"></script>
+  <script src="../static/js/plugins/overscroll.min.js"></script>
   <!-- isotope js -->
-  <script src="js/plugins/isotope.min.js"></script>
+  <script src="../static/js/plugins/isotope.min.js"></script>
   <!-- fancybox js -->
-  <script src="js/plugins/fancybox.min.js"></script>
+  <script src="../static/js/plugins/fancybox.min.js"></script>
   <!-- swup js -->
-  <script src="js/plugins/swup.min.js"></script>
+  <script src="../static/js/plugins/swup.min.js"></script>
   <!-- mapbox js -->
-  <script src="js/plugins/mapbox.min.js"></script>
+  <script src="../static/js/plugins/mapbox.min.js"></script>
 
   <!-- main js -->
-  <script src="js/main.js"></script>
+  <script src="../static/js/main.js"></script>
 
 </body>
 
