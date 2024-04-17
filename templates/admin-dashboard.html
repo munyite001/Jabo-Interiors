@@ -71,9 +71,31 @@
             <h2>Manage Gallery</h2>
             <form id="image-upload-form" enctype="multipart/form-data">
                 <input class="image-upload" type="file" name="image" accept="image/*" required>
+                <select id="category" name="category" required>
+                  <option value="" disabled selected>Select a category</option>
+                  <option value="Fabrication">Fabrication</option>
+                  <option value="Interior fitting">Interior fitting</option>
+                  <option value="Design">Design</option>
+                </select><br><br>
                 <button type="submit">Upload Image</button>
                 <p class="file-upload-success">File Uploaded Successfully</p>
             </form>
+            <div class="gallery-items">
+              {% if images %}
+                {% for image in images %}
+                  <div class="gallery-item">
+                    <div class="gallery-image-container" style="background-image: url({{image.filepath}});"></div>
+                    <p>{{ image.filename }}</p>
+                    <form action="/admin/delete/{{ image.id }}" method="post">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <button type="submit" class="delete-button">Delete</button>
+                  </form>
+                  </div>
+                {% endfor %}
+                {% else %}
+                  <p>No images in the gallery</p>
+              {% endif %}
+            </div>
         </div>
         <div id="messages" class="tab-content">
             Messages
@@ -127,7 +149,7 @@
             });
 
             // Show the selected tab content
-            document.getElementById(tabName).style.display = 'block';
+            document.getElementById(tabName).style.display = 'flex';
 
             // Add active class to the selected tab
             document.querySelector(`.qrt-dynamic-menu ul li a[href="#${tabName}"]`).parentNode.classList.add('current-menu-item');
