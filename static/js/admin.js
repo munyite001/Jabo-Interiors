@@ -1,3 +1,27 @@
+const sidebarLinks = document.querySelectorAll(".sidebar-link");
+const displaySections = document.querySelectorAll(".display-container");
+
+
+sidebarLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+        sidebarLinks.forEach((item) => {
+            item.classList.remove("active")
+        })
+        link.classList.add("active");
+
+        const target = link.getAttribute("data-target");
+        displaySections.forEach((section) => {
+            if (section.id == target) {
+                section.style.display = "block"
+            }
+            else {
+                section.style.display= "none"
+            }
+        })
+    })
+})
+
+
 const success = document.querySelector('.file-upload-success');
 
 document.getElementById('image-upload-form').addEventListener('submit', function(event) {

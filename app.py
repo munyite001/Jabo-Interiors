@@ -5,7 +5,6 @@ from helpers import login_required, is_valid_userName, is_valid_email
 import sqlite3
 import datetime
 import os
-import time
 
 # Configure application
 app = Flask(__name__)
@@ -51,14 +50,31 @@ def portfolio():
 
 @app.route('/admin', methods=["GET", "POST"])
 def admin():
-    images = []
     conn = get_db()
     db = conn.cursor()
     db.execute('SELECT * FROM images')
     images = db.fetchall()
+    db.execute(' SELECT * FROM messages')
+    messages = db.fetchall()
+    sorted_messages = sorted(messages, key=lambda x: datetime.datetime.strptime(x['sent_at'], '%Y-%m-%d %H:%M:%S.%f'), reverse=True)
+
     conn.close()
+
+    formatted_messages = []
+
+    for message in sorted_messages:
+        sent_at = datetime.datetime.strptime(message['sent_at'], '%Y-%m-%d %H:%M:%S.%f')
+        formatted_date = sent_at.strftime('%B %d, %Y %I:%M %p')
+        formatted_messages.append({
+            'sender_name': message['sender_name'],
+            'sender_email': message['sender_email'],
+            'message_body': message['message_body'],
+            'sent_at': formatted_date
+        })
+
+
     if request.method == "GET":
-        return render_template("admin-dashboard.html", images=images)
+        return render_template("admin-dashboard.html", images=images, messages=formatted_messages)
     
 @app.route('/admin/upload', methods=["POST"])
 def upload_image():
@@ -82,8 +98,7 @@ def upload_image():
     conn.commit()
     conn.close()
 
-    time.sleep(1)
-    return redirect("/admin")
+    return jsonify({'message': 'File uploaded successfully'}), 200
 
 
 #   Delete images from gallery
@@ -103,11 +118,11 @@ def delete_image(image_id):
             db.execute('DELETE FROM images WHERE id = ?', (image_id,))
             conn.commit()
             conn.close()
-            return jsonify({'message': 'Image deleted successfully'}), 200
+            return jsonify({'message': 'Image deleted successfully'})
         else:
-            return jsonify({'message': 'Image not found'}), 404
+            return jsonify({'message': 'Image not found'})
     else:
-        return jsonify({'message': 'Method not allowed'}), 405
+        return jsonify({'message': 'Method not allowed'})
 
 
 
@@ -131,6 +146,30 @@ def get_images():
         })
 
     return jsonify({'images': images_list})
+
+
+@app.route("/messages", methods=["POST"])
+def messages():
+
+    name = request.form.get("name")
+    email = request.form.get("email")
+    message = request.form.get("message")
+    date = datetime.datetime.now()
+    if not name or not email or not message:
+        flash("All fields Must be filled")
+
+    #   Connect to the database
+    conn = get_db()
+    db = conn.cursor()
+
+    db.execute("INSERT INTO messages (sender_name, sender_email, message_body, sent_at) VALUES (?, ?, ?, ?)", 
+                (name, email, message, date))
+
+    conn.commit()
+    conn.close()
+
+    return jsonify({'message': 'Message successfully Sent'})
+        
 
 
 #   Start the server

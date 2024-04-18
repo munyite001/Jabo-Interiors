@@ -1,161 +1,51 @@
-<!doctype html>
-<html lang="eng">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- color of address bar in mobile browser -->
-  <meta name="theme-color" content="#28292C">
-  <!-- favicon  -->
-  <link rel="shortcut icon" href="../static/img/thumbnail.ico" type="image/x-icon">
-  <!-- bootstrap css -->
-  <link rel="stylesheet" href="../static/css/plugins/bootstrap.min.css">
-  <!-- font awesome css -->
-  <link rel="stylesheet" href="../static/css/plugins/font-awesome.min.css">
-  <!-- swiper css -->
-  <link rel="stylesheet" href="../static/css/plugins/swiper.min.css">
-  <!-- fancybox css -->
-  <link rel="stylesheet" href="../static/css/plugins/fancybox.min.css">
-  <!-- mapbox css -->
-  <link href="../static/css/plugins/mapbox-style.css" rel='stylesheet'>
-  <!-- main css -->
-  <link rel="stylesheet" href="../static/css/style.css">
-
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet">
-
-  <title>Jabo Interiors</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/admin-styles.css">
 </head>
-
 <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <p>JABO INTERIORS</p>
+        <p>SITE MANAGER</p>
+      </div>
+        <ul class="sidebar-links">
+            <li data-target="dashboard" class="sidebar-link active" ><i class="fas fa-home"></i> Dashboard</li>
+            <li data-target="messages" class="sidebar-link"><i class="fas fa-envelope"></i> Messages</li>
+            <li data-target="gallery" class="sidebar-link"><i class="fas fa-images"></i> Gallery</li>
+            <li><a href="#">View Website</a></li>
+            <li><a href="#">Logout</a></li>
 
-  <div class="qrt-app">
-    <div class="qrt-preloader">
-      <div class="qrt-preloader-content">
-        <div class="qrt-logo">
-          <span class="loader">Jabo</span>
-        </div>
-        <div id="preloader" class="qrt-preloader-load"></div>
-      </div>
+        </ul>
     </div>
-    <div id="cursor" class="qrt-cursor">
-      <div></div>
-      <div class="qrt-follower"><i class="fas fa-circle-notch"></i></div>
-    </div>
-    <div class="qrt-top-bar">
-      <a href="{{ url_for('index') }}" class="qrt-symbol qrt-cursor-scale qrt-anima-link"><span class="logo">J</span></a>
-      <a href="{{ url_for('index') }}" class="qrt-logo qrt-cursor-color qrt-cursor-scale qrt-anima-link">
-        <span class="logo-text">Jabo Interiors</span>
-      </a>
-      <div class="qrt-menu">
-        <div id="qrt-dynamic-menu" class="qrt-dynamic-menu">
-          <nav>
-            <ul>
-                <li class="current-menu-item">
-                  <a class="qrt-mobile-fix" href="#gallery" onclick="showTab('gallery')">Gallery</a>
-                </li>
-                <li>
-                  <a class="qrt-mobile-fix" href="#messages" onclick="showTab('messages')">Messages</a>
-                </li>
-              </ul>
-              
-          </nav>
-        </div>
-      </div>
-    </div>
+    <!-- Main Content -->
     <div class="display">
-        <div id="gallery" class="tab-content">
-            <h2>Manage Gallery</h2>
-            <form id="image-upload-form" enctype="multipart/form-data">
-                <input class="image-upload" type="file" name="image" accept="image/*" required>
-                <select id="category" name="category" required>
-                  <option value="" disabled selected>Select a category</option>
-                  <option value="Fabrication">Fabrication</option>
-                  <option value="Interior fitting">Interior fitting</option>
-                  <option value="Design">Design</option>
-                </select><br><br>
-                <button type="submit">Upload Image</button>
-                <p class="file-upload-success">File Uploaded Successfully</p>
-            </form>
-            <div class="gallery-items">
-              {% if images %}
-                {% for image in images %}
-                  <div class="gallery-item">
-                    <div class="gallery-image-container" style="background-image: url({{image.filepath}});"></div>
-                    <p>{{ image.filename }}</p>
-                    <form action="/admin/delete/{{ image.id }}" method="post">
-                      <input type="hidden" name="_method" value="DELETE">
-                      <button type="submit" class="delete-button">Delete</button>
-                  </form>
-                  </div>
-                {% endfor %}
-                {% else %}
-                  <p>No images in the gallery</p>
-              {% endif %}
-            </div>
+      <div id="dashboard" class="display-container" style="display: block;">
+        <div class="title-box">
+          <h2>Dashboard</h2>
         </div>
-        <div id="messages" class="tab-content">
-            Messages
-        </div>
-    </div>
-    <div class="qrt-left-bar">
-      <div class="qrt-current-page-title">Admin</div>
-      <div class="qrt-change-language">
-        <a href="#." class="qrt-leng qrt-active">KE</a>
       </div>
+
+      <div id="messages" class="display-container" style="display: none;">
+        <div class="title-box">
+          <h2>Messages</h2>
+        </div>
+      </div>
+
+      <div id="gallery" class="display-container" style="display: none;">
+        <div class="title-box">
+          <h2>Gallery</h2>
+        </div>
+      </div>
+
     </div>
-    <div class="qrt-curtain"></div>
-    <div id="qrt-dynamic-content" class="qrt-dynamic-content">
-
-      <!-- jquery js -->
-      <script src="../static/js/plugins/jquery.min.js"></script>
-      <!-- anime js -->
-      <script src="../static/js/plugins/anime.min.js"></script>
-      <!-- swiper js -->
-      <script src="../static/js/plugins/swiper.min.js"></script>
-      <!-- progressbar js -->
-      <script src="../static/js/plugins/progressbar.min.js"></script>
-      <!-- smooth scrollbar js -->
-      <script src="../static/js/plugins/smooth-scrollbar.min.js"></script>
-      <!-- overscroll js -->
-      <script src="../static/js/plugins/overscroll.min.js"></script>
-      <!-- isotope js -->
-      <script src="../static/js/plugins/isotope.min.js"></script>
-      <!-- fancybox js -->
-      <script src="../static/js/plugins/fancybox.min.js"></script>
-      <!-- swup js -->
-      <script src="../static/js/plugins/swup.min.js"></script>
-      <!-- mapbox js -->
-      <script src="../static/js/plugins/mapbox.min.js"></script>
-      <!-- Admin Functionality -->
-      <script src="../static/js/admin.js"></script>
-
-      <!-- main js -->
-      <script src="../static/js/main.js"></script>
-      <script>
-        function showTab(tabName) {
-            
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.style.display = 'none';
-            });
-
-            // Remove active class from all tabs
-            document.querySelectorAll('.qrt-dynamic-menu ul li').forEach(tab => {
-                tab.classList.remove('current-menu-item');
-            });
-
-            // Show the selected tab content
-            document.getElementById(tabName).style.display = 'flex';
-
-            // Add active class to the selected tab
-            document.querySelector(`.qrt-dynamic-menu ul li a[href="#${tabName}"]`).parentNode.classList.add('current-menu-item');
-            console.log(document.querySelector(`.qrt-dynamic-menu ul li a[href="#${tabName}"]`).parentNode)
-}
-    </script>
+  
+<script src="../static/js/admin.js"></script>
 </body>
-
 </html>
