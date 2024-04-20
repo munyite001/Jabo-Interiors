@@ -61,6 +61,13 @@ def admin():
     conn.close()
 
     formatted_messages = []
+    formatted_images = []
+
+    for image in images:
+        name = image['filename'][0:6]
+        formatted_name = f"{name}..."
+        formatted_images.append({**image, 'filename': formatted_name})
+        
 
     for message in sorted_messages:
         sent_at = datetime.datetime.strptime(message['sent_at'], '%Y-%m-%d %H:%M:%S.%f')
@@ -74,7 +81,7 @@ def admin():
 
 
     if request.method == "GET":
-        return render_template("admin-dashboard.html", images=images, messages=formatted_messages)
+        return render_template("admin-dashboard.html", images=formatted_images, messages=formatted_messages)
     
 @app.route('/admin/upload', methods=["POST"])
 def upload_image():

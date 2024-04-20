@@ -19,7 +19,7 @@
             <li data-target="dashboard" class="sidebar-link active" ><i class="fas fa-home"></i> Dashboard</li>
             <li data-target="messages" class="sidebar-link"><i class="fas fa-envelope"></i> Messages</li>
             <li data-target="gallery" class="sidebar-link"><i class="fas fa-images"></i> Gallery</li>
-            <li><a href="#">View Website</a></li>
+            <li><a href="#"><i class="fas fa-globe"></i> View Website</a></li>
             <li><a href="#">Logout</a></li>
 
         </ul>
@@ -30,6 +30,7 @@
         <div class="title-box">
           <h2>Dashboard</h2>
         </div>
+        <p>Welcome to the Jabo Interiors Website Manager</p>
       </div>
 
       <div id="messages" class="display-container" style="display: none;">
@@ -41,6 +42,46 @@
       <div id="gallery" class="display-container" style="display: none;">
         <div class="title-box">
           <h2>Gallery</h2>
+        </div>
+        <div class="gallery-content">
+        <div class="image-upload-conatiner">
+          <h3> Upload Images </h3>
+          <div class="line"></div>
+          <form id="image-upload-form" enctype="multipart/form-data">
+            <input class="image-upload" type="file" name="image" accept="image/*" required>
+            <select id="category" name="category" required>
+              <option value="" disabled selected>Select a category</option>
+              <option value="Fabrication">Fabrication</option>
+              <option value="Interior fitting">Interior fitting</option>
+              <option value="Design">Design</option>
+            </select><br><br>
+            <button type="submit">Upload Image</button>
+            <p class="file-upload-success">File Uploaded Successfully</p>
+        </form>
+        </div>
+        <hr/>
+        <div class="image-view-container">
+          <h3>Images In Gallery</h3>
+          <div class="line"></div>
+          <div class="gallery-items">
+            {% if images %}
+              {% for image in images %}
+                <div class="gallery-item">
+                  <div class="gallery-image-container" style='background: url("{{image.filepath}}");'></div>
+                  <div class="image-info">
+                    <p>{{ image.filename }}...</p>
+                    <form action="/admin/delete/{{ image.id }}" method="post">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              {% endfor %}
+              {% else %}
+                <p>No images in the gallery</p>
+            {% endif %}
+          </div>
+        </div>
         </div>
       </div>
 

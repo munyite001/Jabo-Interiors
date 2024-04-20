@@ -1,4 +1,17 @@
 /* Sidebar Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -43,20 +56,202 @@ h1 {
 .logo p {
     margin: 0;
     font-weight: 900;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .sidebar-link.active {
     background-color: #ffd54f;
-    color: black;
+    color: #333;
+}
+
+.sidebar-links a {
+    color: white;
 }
 
 .display-container {
     width: 100%;
-    min-height: 100vh;
-    overflow-y: hidden;
+    height: 100%;
+}
+
+.display-container > p {
+    margin: 1rem;
 }
 
 .display-container .title-box {
-width: 100%;
-border: 1px solid red;
+    width: 100%;
+    box-shadow: 0 3px 3px 3px #f7f8f8;
+    padding: 1.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.gallery-content {
+    padding: 1rem;
+    width: 100%;
+    height: 87vh;
+    display: flex;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.gallery-content .image-upload-conatiner {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery-content .line {
+    margin: 0.5rem 1rem;
+    width: 5rem;
+    height: 0.3rem;
+    background-color: #ffd54f;
+}
+
+.image-upload-conatiner #image-upload-form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    background-color: #fff;
+    box-shadow: 0 0 3px 3px #dedbdb6f;
+    border-radius: 10px;
+}
+
+#image-upload-form input {
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+#image-upload-form input::-webkit-file-upload-button {
+    padding: 0.5rem;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#image-upload-form input::-webkit-file-upload-button:hover {
+    background-color: #ffd54f;
+    color: #fff;
+    border-color: #ffd54f;
+}
+
+#image-upload-form select {
+    padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#image-upload-form select option {
+    margin: 1rem;
+}
+
+#image-upload-form button {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffd54f;
+    color: white;
+    cursor: pointer;
+}
+
+#image-upload-form button:hover {
+    box-shadow: inset 0 0 3px 1px #d2b042;
+}
+
+
+
+
+#image-upload-form .file-upload-success {
+    margin: 1rem 0;
+    display: none;
+    color: green !important;
+}
+
+.gallery-content .image-view-container {
+    width: 50%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+
+@media (max-width: 1010px) {
+    .gallery-content {
+        flex-direction: column;
+    }
+
+    .gallery-content .image-upload-conatiner {
+        width: 100%;
+    }
+
+    .gallery-content .image-view-container {
+        width: 100%;
+    }
+}
+
+
+
+.gallery-content .image-view-container {
+    padding: 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-view-container .gallery-items {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gallery-items .gallery-item {
+    width: 40%;
+    height: 200px;
+    margin: 0.5rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    border: 1px solid #ffd54f;
+    border-radius: 5px;
+}
+
+.gallery-item .image-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 10rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    display: none;
+}
+
+.gallery-item:hover .image-info {
+    display: flex;
+}
+
+
+.gallery-item .gallery-image-container {
+    width: 100%;
+    height: 100%;
+}
+
+
+.gallery-item form button {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.1rem 0.5rem;
+    background-color: white;
+    color: #ffd54f;
+    border: 1px solid #ffd54f;
 }
