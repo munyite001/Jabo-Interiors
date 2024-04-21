@@ -7,6 +7,10 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../static/css/admin-styles.css">
+  <!-- font awesome css -->
+  <link rel="stylesheet" href="../static/css/plugins/font-awesome.min.css">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="../static/css/plugins/bootstrap.min.css">
 </head>
 <body>
     <!-- Sidebar -->
@@ -19,13 +23,28 @@
             <li data-target="dashboard" class="sidebar-link active" ><i class="fas fa-home"></i> Dashboard</li>
             <li data-target="messages" class="sidebar-link"><i class="fas fa-envelope"></i> Messages</li>
             <li data-target="gallery" class="sidebar-link"><i class="fas fa-images"></i> Gallery</li>
-            <li><a href="#"><i class="fas fa-globe"></i> View Website</a></li>
+            <li><a href="{{url_for('index')}}"><i class="fas fa-globe"></i> View Website</a></li>
             <li><a href="#">Logout</a></li>
 
         </ul>
     </div>
     <!-- Main Content -->
+    <div class="mobile-menu">
+      <div class="close-btn">
+        <i class="fas fa-times"></i>
+      </div>
+      <ul>
+        <li data-target="dashboard" class="sidebar-link mobile-link active" ><i class="fas fa-home"></i> Dashboard</li>
+        <li data-target="messages" class="sidebar-link mobile-link"><i class="fas fa-envelope"></i> Messages</li>
+        <li data-target="gallery" class="sidebar-link mobile-link"><i class="fas fa-images"></i> Gallery</li>
+        <li><a href="{{url_for('index')}}"><i class="fas fa-globe"></i> View Website</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
     <div class="display">
+      <div class="open-menu">
+        <i class="fa fa-bars"></i>
+      </div>
       <div id="dashboard" class="display-container" style="display: block;">
         <div class="title-box">
           <h2>Dashboard</h2>
@@ -36,6 +55,24 @@
       <div id="messages" class="display-container" style="display: none;">
         <div class="title-box">
           <h2>Messages</h2>
+        </div>
+        <div class="messages">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="message-item">
+                <div class="top">
+                  <p><span>Name:</span> {{ message.sender_name }}</p>
+                  <p><span>Email:</span> {{ message.sender_email }}</p>
+                </div>
+                <div class="body">
+                  <p><span>Message:</span>" {{ message.message_body }} "</p>
+                  <p><span>Time:</span> {{ message.sent_at }}</p>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <p>You have no new Messages</p>
+          {% endif %}
         </div>
       </div>
 

@@ -50,3 +50,26 @@ document.getElementById('image-upload-form').addEventListener('submit', function
         // Display an error message
     });
 });
+
+
+//  Closing and opening the mobile menu
+const openBtn = document.querySelector('.open-menu i')
+const closeBtn = document.querySelector('.close-btn i')
+const mobileMenu = document.querySelector('.mobile-menu')
+const mobileLinks = document.querySelectorAll('.mobile-link')
+
+openBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('show-menu')
+})
+
+closeBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('show-menu')
+})
+
+mobileLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+        setTimeout(() => {
+            mobileMenu.classList.remove('show-menu');
+        }, 500)
+    })
+})

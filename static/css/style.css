@@ -2814,7 +2814,13 @@ portfolio
 /* ----- masonry grid ----- */
 .qrt-masonry-grid {
   margin: -10px;
-  min-height: 100vh !important; }
+  min-height: 100vh !important; 
+}
+
+.portfolio-image-grid {
+  width: 100%;
+  min-height: 100vh !important;
+}
 
 .qrt-masonry-grid:after {
   content: '';

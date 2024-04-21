@@ -1,7 +1,7 @@
 from flask import Flask, redirect, g, render_template, request, session, jsonify, flash, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from helpers import login_required, is_valid_userName, is_valid_email
+from helpers import login_required
 import sqlite3
 import datetime
 import os
@@ -48,7 +48,66 @@ def contact():
 def portfolio():
     return render_template("portfolio.html")
 
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    """ Log Admin In """
+    
+    conn = get_db()
+    db = conn.cursor()
+
+    #   Forget any previous User Ids
+    session.clear()
+
+    #   POST i.e., Logging in
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if not username:
+            flash("Must provide a valid username")
+            return render_template("login.html")
+
+        elif not password:
+            flash("Must provide a valid password")
+            return render_template("login.html")
+    
+        #   Query the database for username
+        user = db.execute("SELECT * FROM ADMIN WHERE username = ?", (username,)).fetchall()
+
+        #   Ensure username exists and password is correct
+        if len(user) != 1 or not check_password_hash(user[0]["password_hash"], password):
+            flash("Invalid username and/or password")
+            return render_template("login.html")
+
+
+        #   If all is good
+
+        #   Set the session of the user
+        session["user_id"] = user[0]["id"]
+        session["last_activity"] = datetime.datetime.now()
+
+        conn.commit()
+        conn.close()
+
+        #   Redirect the admin to the dashboard
+        return redirect("/admin")
+    
+
+    #   If user is simply accessing the page
+    return render_template("login.html")
+
+
+
+@app.route("/logout")
+def logout():
+    """Log Admin out"""
+    session.clear()
+    return redirect("/login")
+
+
+
 @app.route('/admin', methods=["GET", "POST"])
+@login_required
 def admin():
     conn = get_db()
     db = conn.cursor()
@@ -84,6 +143,7 @@ def admin():
         return render_template("admin-dashboard.html", images=formatted_images, messages=formatted_messages)
     
 @app.route('/admin/upload', methods=["POST"])
+@login_required
 def upload_image():
     if 'image' not in request.files:
         return jsonify({'message': 'No file part'}), 400
@@ -110,6 +170,7 @@ def upload_image():
 
 #   Delete images from gallery
 @app.route('/admin/delete/<int:image_id>', methods=["POST", "DELETE"])
+@login_required
 def delete_image(image_id):
     if request.method == "POST" and request.form.get('_method') == "DELETE":
         conn = get_db()
@@ -156,6 +217,7 @@ def get_images():
 
 
 @app.route("/messages", methods=["POST"])
+@login_required
 def messages():
 
     name = request.form.get("name")
@@ -176,7 +238,6 @@ def messages():
     conn.close()
 
     return jsonify({'message': 'Message successfully Sent'})
-        
 
 
 #   Start the server

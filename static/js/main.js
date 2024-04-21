@@ -861,13 +861,13 @@ function fetchImages() {
       // Once the images are fetched, update the grid items
       updateGridItems();
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error:', error);
     });
 }
 
 function updateGridItems() {
-  var portfolio = document.querySelector('.qrt-masonry-grid');
+  var portfolio = document.querySelector('.portfolio-image-grid');
   if (gallery.length < 1) {
     portfolio.textContent = '<p>No Images To Show </p>';
   } else {
@@ -908,5 +908,4 @@ filterButtons.forEach(button => {
     filterItems(category);
   });
 });
-
 fetchImages();
