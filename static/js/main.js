@@ -909,3 +909,44 @@ filterButtons.forEach(button => {
   });
 });
 fetchImages();
+
+
+//  Handle form submits
+const form = document.getElementById('form');
+const modal = document.getElementById('success-modal');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  sendMessage()
+})
+
+//  Function to send the message to the server
+function sendMessage() {
+  // Get the form data
+  let formData = new FormData(form);
+
+  // Send a POST request to the server
+  fetch('/messages', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => {
+      if (response.ok) {
+          // Display a success message or modal
+          console.log('Message sent successfully');
+          modal.style.display="flex"
+          setTimeout(() => {
+            modal.style.display="none"
+          }, 1500)
+          document.getElementById('name').value= ''
+          document.getElementById('email').value= ''
+          document.getElementById('message').value= ''
+      } else {
+          // Handle the error
+          console.error('Failed to send message');
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+}

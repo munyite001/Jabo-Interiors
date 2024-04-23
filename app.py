@@ -12,6 +12,7 @@ DATABASE = "app.db"
 
 app.secret_key = os.urandom(24)
 
+
 # Configure the database
 def get_db():
     db = getattr(g, "_database", None)
@@ -142,8 +143,9 @@ def admin():
     if request.method == "GET":
         return render_template("admin-dashboard.html", images=formatted_images, messages=formatted_messages)
     
+
+
 @app.route('/admin/upload', methods=["POST"])
-@login_required
 def upload_image():
     if 'image' not in request.files:
         return jsonify({'message': 'No file part'}), 400
@@ -151,15 +153,19 @@ def upload_image():
     file = request.files['image']
     category = request.form.get('category')
 
+    ext = datetime.datetime.now().timestamp() * 1000
+
+    filename = f'Project-{ext}{os.path.splitext(file.filename)[1]}'
+
     # Save the file to a folder or process it in some way
     # For example, save it to a folder named "uploads"
-    file.save('./static/uploads/' + file.filename)
+    file.save('./static/uploads/' + filename)
     
     # Store file information and category in the database
     conn = get_db()
     db = conn.cursor()
     db.execute('INSERT INTO images (filename, filepath, category, uploaded_at) VALUES (?, ?, ?, ?)',
-              (file.filename, '/static/uploads/' + file.filename, category, datetime.datetime.now()))
+              (filename, '/static/uploads/' + filename, category, datetime.datetime.now()))
 
 
     conn.commit()
@@ -217,13 +223,13 @@ def get_images():
 
 
 @app.route("/messages", methods=["POST"])
-@login_required
 def messages():
 
     name = request.form.get("name")
     email = request.form.get("email")
     message = request.form.get("message")
     date = datetime.datetime.now()
+    
     if not name or not email or not message:
         flash("All fields Must be filled")
 
